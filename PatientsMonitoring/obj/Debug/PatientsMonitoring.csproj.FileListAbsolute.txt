@@ -1,0 +1,10 @@
+D:\VS2019\Forms\PatientsMonitoring\PatientsMonitoring\bin\Debug\PatientsMonitoring.exe.config
+D:\VS2019\Forms\PatientsMonitoring\PatientsMonitoring\bin\Debug\PatientsMonitoring.exe
+D:\VS2019\Forms\PatientsMonitoring\PatientsMonitoring\bin\Debug\PatientsMonitoring.pdb
+D:\VS2019\Forms\PatientsMonitoring\PatientsMonitoring\obj\Debug\PatientsMonitoring.csproj.AssemblyReference.cache
+D:\VS2019\Forms\PatientsMonitoring\PatientsMonitoring\obj\Debug\PatientsMonitoring.Form1.resources
+D:\VS2019\Forms\PatientsMonitoring\PatientsMonitoring\obj\Debug\PatientsMonitoring.Properties.Resources.resources
+D:\VS2019\Forms\PatientsMonitoring\PatientsMonitoring\obj\Debug\PatientsMonitoring.csproj.GenerateResource.cache
+D:\VS2019\Forms\PatientsMonitoring\PatientsMonitoring\obj\Debug\PatientsMonitoring.csproj.CoreCompileInputs.cache
+D:\VS2019\Forms\PatientsMonitoring\PatientsMonitoring\obj\Debug\PatientsMonitoring.exe
+D:\VS2019\Forms\PatientsMonitoring\PatientsMonitoring\obj\Debug\PatientsMonitoring.pdb
