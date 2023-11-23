@@ -67,6 +67,7 @@ namespace PatientsMonitoring
                 eventDate = eventDateTime.Split(' ')[0];
                 dateArr.Add(eventDate);
             }
+            dateArr.Add("All");
             List<string> uniqueDate = dateArr.Distinct().ToList();
             return uniqueDate.ToArray();
         }
@@ -74,15 +75,18 @@ namespace PatientsMonitoring
         //WHERE CAST([Order Date] AS date) BETWEEN '2012-06-21' AND '2012-09-21'
         // 7/22/2019
 
-        public static DataTable FetchDataBySubjAndDate(string subj, string date)
+        public static DataTable FetchDataBySubjAndDate(string subj, string[] date)
         {
+            string sqlDate = "'" + date[0] + "'";
+            for (int i = 1; i < date.Length; i++ )
+                sqlDate = sqlDate + ",'" + date[i] + "'";
             DataTable patientTable = null;
             var con = new SqlConnection(@"Data Source = HRR-PC; Initial Catalog=HRR_DB; Trusted_Connection=True");
             try
             {
                 //Console.WriteLine("Opening Connection");
                 con.Open();
-                patientTable = FetchData("SELECT * FROM Patients WHERE SubjId = '" + subj + "' AND CAST([Date_Event] AS date) ='" + date + "'", con);
+                patientTable = FetchData("SELECT * FROM Patients WHERE SubjId = '" + subj + "' AND CAST([Date_Event] AS date) in ("+sqlDate +")", con);
                 con.Close();
             }
             catch
@@ -122,24 +126,53 @@ namespace PatientsMonitoring
             return temperatureSensor.ToArray();
         }
 
-        public static List<object> GetTemperatureOfJoinedSensors(DataTable patientDT)
+        public static List<object> GetEventsAndTemperaturesOfDate(DataTable patientDT, string date)
         {
-            List<object> temperatureSensor = new List<object>();
-            DataTable sensorDT = patientDT.AsEnumerable()
-            //.Where(row => row.Field<String>("SensorId") == sensor)
+            List<object> eventTemperatureList = new List<object>();
+
+            DataTable dateDT = patientDT.AsEnumerable()
+            .Where(row => {
+                string dateEvent = row.Field<DateTime>("Date_Event").ToString().Split(' ')[0];
+                int a = 10;
+                return dateEvent == date;
+            })
               .OrderBy(row => row.Field<DateTime>("Date_Event"))
               .CopyToDataTable();
-
-            foreach (DataRow dr in sensorDT.Rows)
+            foreach (DataRow dr in dateDT.Rows)
             {
+
                 TimeEventInfo teInfo;
                 string eventDateTime = dr.ItemArray[2].ToString();
                 string eventTime = eventDateTime.Split(' ')[1] + eventDateTime.Split(' ')[2];
                 teInfo.time = eventTime;
                 teInfo.temperature = (double)dr["Temperature"];
-                temperatureSensor.Add(teInfo);
+                eventTemperatureList.Add(teInfo);
             }
-            return temperatureSensor;
+            return eventTemperatureList;
+        }
+
+
+
+        public static Dictionary<string, List<object>> GetTemperatureOfPatientDates(DataTable patientDT, string[] dateArr)
+        {
+            Dictionary<string, List<object>> dateTemperatureDict = new Dictionary<string, List<object>>();
+            DataTable dateDT = patientDT.AsEnumerable()
+            .Where(row => {
+                string dateEvent = row.Field<DateTime>("Date_Event").ToString().Split(' ')[0];
+                bool check = dateArr.Contains(dateEvent);
+                if (!check)
+                    check = false;
+                return dateArr.Contains(dateEvent);
+            })
+              .OrderBy(row => row.Field<DateTime>("Date_Event"))
+              .CopyToDataTable();
+
+
+            for (int i = 0; i < dateArr.Length; i++)
+            {
+                dateTemperatureDict.Add(dateArr[i], GetEventsAndTemperaturesOfDate(dateDT, dateArr[i]));
+            }
+            return dateTemperatureDict;
         }
 
 
@@ -155,10 +188,9 @@ namespace PatientsMonitoring
             return sensorDict;
         }
 
-        public static List<object> CreateJoinedTemperatureList(DataTable patientTable)
+        public static Dictionary<string, List<object>> CreateJoinedTemperatureList(DataTable patientTable, string[] dateArr)
         {
-            List<object> sensorTemperature = GetTemperatureOfJoinedSensors(patientTable);
-            return sensorTemperature;
+            return GetTemperatureOfPatientDates(patientTable, dateArr);
         }
 
 

@@ -29,15 +29,17 @@ namespace PatientsMonitoring
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.filterPanel = new System.Windows.Forms.Panel();
             this.generateBtn = new System.Windows.Forms.Button();
             this.dateCB = new System.Windows.Forms.ComboBox();
             this.subjCB = new System.Windows.Forms.ComboBox();
             this.patientsDataGrid = new System.Windows.Forms.DataGridView();
             this.monitoringChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.filterPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientsDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.monitoringChart)).BeginInit();
@@ -46,6 +48,8 @@ namespace PatientsMonitoring
             // filterPanel
             // 
             this.filterPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.filterPanel.Controls.Add(this.label2);
+            this.filterPanel.Controls.Add(this.label1);
             this.filterPanel.Controls.Add(this.generateBtn);
             this.filterPanel.Controls.Add(this.dateCB);
             this.filterPanel.Controls.Add(this.subjCB);
@@ -58,11 +62,12 @@ namespace PatientsMonitoring
             // 
             // generateBtn
             // 
-            this.generateBtn.Location = new System.Drawing.Point(369, 30);
+            this.generateBtn.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.generateBtn.Location = new System.Drawing.Point(631, 30);
             this.generateBtn.Name = "generateBtn";
-            this.generateBtn.Size = new System.Drawing.Size(79, 23);
+            this.generateBtn.Size = new System.Drawing.Size(159, 37);
             this.generateBtn.TabIndex = 2;
-            this.generateBtn.Text = "button1";
+            this.generateBtn.Text = "Generate Plot";
             this.generateBtn.UseVisualStyleBackColor = true;
             this.generateBtn.Click += new System.EventHandler(this.generateBtn_Click);
             // 
@@ -70,7 +75,7 @@ namespace PatientsMonitoring
             // 
             this.dateCB.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateCB.FormattingEnabled = true;
-            this.dateCB.Location = new System.Drawing.Point(186, 30);
+            this.dateCB.Location = new System.Drawing.Point(394, 30);
             this.dateCB.Name = "dateCB";
             this.dateCB.Size = new System.Drawing.Size(121, 28);
             this.dateCB.TabIndex = 1;
@@ -83,7 +88,7 @@ namespace PatientsMonitoring
             this.subjCB.Items.AddRange(new object[] {
             "Subj_1",
             "Subj_2"});
-            this.subjCB.Location = new System.Drawing.Point(25, 30);
+            this.subjCB.Location = new System.Drawing.Point(108, 27);
             this.subjCB.Name = "subjCB";
             this.subjCB.Size = new System.Drawing.Size(121, 28);
             this.subjCB.TabIndex = 0;
@@ -103,19 +108,39 @@ namespace PatientsMonitoring
             this.monitoringChart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.Name = "ChartArea1";
-            this.monitoringChart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.monitoringChart.Legends.Add(legend1);
+            chartArea2.Name = "ChartArea1";
+            this.monitoringChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.monitoringChart.Legends.Add(legend2);
             this.monitoringChart.Location = new System.Drawing.Point(353, 100);
             this.monitoringChart.Name = "monitoringChart";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.monitoringChart.Series.Add(series1);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.monitoringChart.Series.Add(series2);
             this.monitoringChart.Size = new System.Drawing.Size(502, 226);
             this.monitoringChart.TabIndex = 2;
             this.monitoringChart.Text = "chart1";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(38, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 23);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Patients";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial Narrow", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(338, 32);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 23);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Dates";
             // 
             // Form1
             // 
@@ -128,6 +153,7 @@ namespace PatientsMonitoring
             this.Name = "Form1";
             this.Text = "Form1";
             this.filterPanel.ResumeLayout(false);
+            this.filterPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.patientsDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.monitoringChart)).EndInit();
             this.ResumeLayout(false);
@@ -142,6 +168,8 @@ namespace PatientsMonitoring
         private System.Windows.Forms.ComboBox dateCB;
         private System.Windows.Forms.DataVisualization.Charting.Chart monitoringChart;
         private System.Windows.Forms.Button generateBtn;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label1;
     }
 }
 
